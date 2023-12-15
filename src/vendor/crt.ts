@@ -54,11 +54,11 @@ const CRT = {
           assert([1, 2].includes(days.length), 'Invalid # of days.');
           assert(
             termini.length % days.length == 0 && termini.length >= 2,
-            'Invalid # of orientations.'
+            'Invalid # of termini.'
           );
           assert(
             child_termini.length % days.length == 0 && child_termini.length >= 2,
-            'Invalid # of termini.'
+            'Invalid # of child termini.'
           );
     
           let dayWidth = days[0].colSpan;
