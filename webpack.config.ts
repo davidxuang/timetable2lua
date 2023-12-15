@@ -5,7 +5,7 @@ import * as TerserPlugin from 'terser-webpack-plugin';
 const config: Configuration = {
   mode: 'production',
   entry: {
-    timetable: './src/bootstrap.ts',
+    timetable2lua: './src/bootstrap.ts',
   },
   output: {
     path: path.resolve(__dirname, './dist'),
