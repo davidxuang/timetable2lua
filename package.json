@@ -1,6 +1,6 @@
 {
   "name": "timetable2lua",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Export timetable data as lua table.",
   "scripts": {
     "build": "webpack"

@@ -49,7 +49,7 @@ const config: Configuration = {
 // @author       davidxuang
 // @match        https://www.cqmetro.cn/smbsj.html
 // @homepageURL  https://github.com/davidxuang/timetable2lua
-// @icon         https://upload.wikimedia.org/wikipedia/commons/5/5f/BSicon_SUBWAY-CHN.svg
+// @icon         https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1/icons/vehicle_subway_clock_20_regular.svg
 // @license      AGPL-3.0
 // @grant        GM_setClipboard
 // ==/UserScript==\
