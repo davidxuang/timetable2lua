@@ -1,23 +1,25 @@
 {
   "name": "timetable2lua",
-  "version": "0.1.1",
+  "private": true,
+  "version": "0.1.2",
   "description": "Export timetable data as lua table.",
+  "homepage": "https://github.com/davidxuang/timetable2lua",
+  "type": "module",
   "scripts": {
-    "build": "webpack"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "davidxuang",
+  "license": "AGPL-3.0-only",
   "devDependencies": {
-    "@types/node": "^20.0.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.0.0",
     "@types/wcwidth": "^1.0.0",
-    "path": "^0.12.0",
-    "terser-webpack-plugin": "^5.0.0",
-    "ts-loader": "^9.0.0",
+    "prettier": "^3.0.0",
     "ts-node": "^10.0.0",
     "typescript": "^5.0.0",
-    "webpack": "^5.0.0",
-    "webpack-cli": "^5.0.0"
+    "vite": "^5.0.0",
+    "vite-plugin-monkey": "^3.0.0"
   },
   "dependencies": {
     "pad": "^3.0.0",

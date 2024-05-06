@@ -1,6 +1,6 @@
 import pad from 'pad';
 
-function assert(condition: boolean, message: string = null) {
+function assert(condition: boolean, message?: string) {
   if (!condition) {
     throw new Error(message || 'Assertion failed');
   }
@@ -8,26 +8,26 @@ function assert(condition: boolean, message: string = null) {
 
 type NestedArray<T> = T | NestedArray<T>[];
 type NestedStringArray = NestedArray<string>;
-interface FixedArray<T, L extends number> extends Array<T> {
-  length: L;
-}
+// interface FixedArray<T, L extends number> extends Array<T> {
+//   length: L;
+// }
 
 type FirstPerTerminal = string;
-type FirstPerDay<L extends number> = FixedArray<FirstPerTerminal, L>;
-type LastPerTerminal<L extends number> = L extends 1
-  ? string
-  : FixedArray<string, L>;
-type LastPerDay<L extends readonly number[]> = {
-  [K in keyof L]: LastPerTerminal<L[K]>;
-};
-type TimePerDay<L extends readonly number[]> = [
-  FirstPerDay<L['length']>,
-  LastPerDay<L>
-];
-type Timetable<D extends number, L extends readonly number[]> = Map<
-  string,
-  FixedArray<TimePerDay<L>, D>
->;
+// type FirstPerDay<L extends number> = FixedArray<FirstPerTerminal, L>;
+// type LastPerTerminal<L extends number> = L extends 1
+//   ? string
+//   : FixedArray<string, L>;
+// type LastPerDay<L extends readonly number[]> = {
+//   [K in keyof L]: LastPerTerminal<L[K]>;
+// };
+// type TimePerDay<L extends readonly number[]> = [
+//   FirstPerDay<L['length']>,
+//   LastPerDay<L>
+// ];
+// type Timetable<D extends number, L extends readonly number[]> = Map<
+//   string,
+//   FixedArray<TimePerDay<L>, D>
+// >;
 
 type FlexFirstPerTerminal = FirstPerTerminal;
 type FlexFirstPerDay = FlexFirstPerTerminal[];
