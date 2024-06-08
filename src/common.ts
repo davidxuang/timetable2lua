@@ -38,7 +38,7 @@ type FlexTimetable = Map<string, FlexTimePerDay[]>;
 
 function compareNestedStringArray(
   x: NestedStringArray,
-  y: NestedStringArray
+  y: NestedStringArray,
 ): boolean {
   if (x instanceof Array) {
     if (x.length != y.length) {
@@ -67,7 +67,7 @@ function deduplicateDays(timetable: FlexTimetable) {
       Array.from(timetable.entries()).map(([station, days]) => [
         station,
         [days[0]],
-      ])
+      ]),
     );
   } else {
     return timetable;
@@ -76,7 +76,7 @@ function deduplicateDays(timetable: FlexTimetable) {
 
 function luaifyNestedStringArray(
   array: NestedStringArray,
-  padding: number = 0
+  padding: number = 0,
 ): string {
   if (array instanceof Array) {
     return `{ ${array
@@ -97,17 +97,16 @@ function luaifyNestedStringArray(
  */
 function luaifyTimetable(timetable: FlexTimetable, padding: number) {
   timetable = deduplicateDays(timetable);
-  return `\t\t{
+  return `
 \t\t\tstations = ${luaifyNestedStringArray([...timetable.keys()])},
 \t\t\tdata = {
 ${Array.from(timetable)
   .map(
     ([key, value]) =>
-      `\t\t\t\t${pad(`['${key}']`, padding)} = ${luaifyNestedStringArray(value, 7)},`
+      `\t\t\t\t${pad(`['${key}']`, padding)} = ${luaifyNestedStringArray(value, 7)},`,
   )
   .join('\n')}
-\t\t\t}
-\t\t}`;
+\t\t\t}`;
 }
 
 export { assert, luaifyTimetable };

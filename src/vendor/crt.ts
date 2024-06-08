@@ -114,7 +114,8 @@ const CRT = {
             }
             for (let i = 0; i < terminalOffsets.length; i++) {
               const v = terminalOffsets[i];
-              terminalOffsets[i] = v instanceof Array ? v[0] : v;
+              terminalOffsets[i] =
+                v instanceof Array && v.length == 1 ? v[0] : v;
             }
           } else {
             throw termini.length;
