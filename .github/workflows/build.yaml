@@ -37,4 +37,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: ./dist/timetable2lua.user.js
+          files: |
+            ./dist/timetable2lua.user.js
+            ./dist/timetable2lua.meta.js

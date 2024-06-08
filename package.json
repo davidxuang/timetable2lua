@@ -1,7 +1,7 @@
 {
   "name": "timetable2lua",
   "private": true,
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Export timetable data as lua table.",
   "homepage": "https://github.com/davidxuang/timetable2lua",
   "type": "module",
