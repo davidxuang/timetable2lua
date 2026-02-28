@@ -1,9 +1,26 @@
 import pad from 'pad';
+import wcwidth from 'wcwidth';
 
 function assert(condition: boolean, message?: string) {
   if (!condition) {
     throw new Error(message || 'Assertion failed');
   }
+}
+
+function attachButton(parent: HTMLElement | null, onClick: () => void) {
+  const button = document.createElement('a');
+  button.append('导出');
+  button.addEventListener('click', onClick, false);
+
+  button.style.cursor = 'pointer';
+  button.style.position = 'absolute';
+  button.style.zIndex = '1';
+  button.style.color = 'white';
+  button.style.opacity = '.75';
+  button.style.paddingInlineStart = '.5em';
+  button.style.fontSize = '.84em';
+
+  parent?.appendChild(button);
 }
 
 type NestedArray<T> = T | NestedArray<T>[];
@@ -92,11 +109,12 @@ function luaifyNestedStringArray(
 /**
  * 将时刻表对象序列化为Lua对象
  * @param timetable 时刻表
- * @param padding 站名文本宽度
  * @returns Lua对象字符串
  */
-function luaifyTimetable(timetable: FlexTimetable, padding: number) {
+function luaifyTimetable(timetable: FlexTimetable) {
   timetable = deduplicateDays(timetable);
+  const padding =
+    Math.max(...[...timetable.keys()].map((str) => wcwidth(str))) + 4;
   return `
 \t\t\tstations = ${luaifyNestedStringArray([...timetable.keys()])},
 \t\t\tdata = {
@@ -109,4 +127,10 @@ ${Array.from(timetable)
 \t\t\t}`;
 }
 
-export { assert, luaifyTimetable };
+export {
+  assert,
+  attachButton,
+  luaifyTimetable,
+  type FlexTimetable,
+  type FlexTimePerDay,
+};

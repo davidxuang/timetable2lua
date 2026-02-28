@@ -14,7 +14,10 @@ export default defineConfig({
       userscript: {
         icon: 'https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Metro/3D/metro_3d.png',
         namespace: 'https://dvxg.de/',
-        match: 'https://www.cqmetro.cn/smbsj.html',
+        match: [
+          'https://www.cqmetro.cn/smbsj.html',
+          'https://www.wuhanrt.com/news-content.html*',
+        ],
         updateURL:
           'https://github.com/davidxuang/timetable2lua/releases/latest/download/timetable2lua.meta.js',
         downloadURL:
