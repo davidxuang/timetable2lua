@@ -1,5 +1,5 @@
 import wcwidth from 'wcwidth';
-import { assert, luaifyTimetable } from '../common';
+import { assert, luaifyTimetable } from '../common.js';
 
 type TerminalOffsets = [
   number | number[],
