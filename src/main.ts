@@ -4,9 +4,6 @@ import WHRT from './vendor/whrt.js';
 declare global {
   interface Array<T> {
     single(predicate?: (value: T, index: number, array: T[]) => boolean): T;
-    trySingle(
-      predicate?: (value: T, index: number, array: T[]) => boolean,
-    ): T | T[];
   }
 }
 
@@ -30,21 +27,6 @@ if (!Array.prototype.single) {
     enumerable: false,
     configurable: true,
     writable: true,
-  });
-
-  Object.defineProperty(Array.prototype, 'trySingle', {
-    value: function <T>(
-      this: T[],
-      predicate?: (value: T, index: number, array: T[]) => boolean,
-    ): T | T[] {
-      const target = predicate ? this.filter(predicate) : this;
-
-      if (target.length === 0 || target.length > 1) {
-        return target;
-      }
-
-      return target[0];
-    },
   });
 }
 

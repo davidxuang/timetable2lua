@@ -124,8 +124,8 @@ const CRT = {
               }
             }
 
-            offsetLast[0] = dl.trySingle();
-            offsetLast[1] = ul.trySingle();
+            [offsetLast[0], offsetLast[1]] =
+              dl.length == 1 && ul.length == 1 ? [dl[0], ul[0]] : [dl, ul];
           } else {
             throw termini.length;
           }

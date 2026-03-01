@@ -1,4 +1,9 @@
-import { assert, attachButton, FlexTimetable, luaifyTimetable } from '../common.js';
+import {
+  assert,
+  attachButton,
+  FlexTimetable,
+  luaifyTimetable,
+} from '../common.js';
 
 function parseCell(cell: HTMLElement) {
   return cell.innerText.trim().replace(/\p{Pd}+|[（(]到达[）)]/u, '');
@@ -33,18 +38,16 @@ const WHRT = {
           sub_termini.find((td) => td.innerText.trim().startsWith('首班车'))!
             .cellIndex,
         ];
-        const offsetLast = [
-          sub_termini
-            .slice(terminiSpans[0])
-            .filter((td) => td.innerText.trim().startsWith('末班车'))
-            .map((td) => td.cellIndex)
-            .trySingle(),
-          sub_termini
-            .slice(0, terminiSpans[0])
-            .filter((td) => td.innerText.trim().startsWith('末班车'))
-            .map((td) => td.cellIndex)
-            .trySingle(),
-        ];
+        const dl = sub_termini
+          .slice(terminiSpans[0])
+          .filter((td) => td.innerText.trim().startsWith('末班车'))
+          .map((td) => td.cellIndex);
+        const ul = sub_termini
+          .slice(0, terminiSpans[0])
+          .filter((td) => td.innerText.trim().startsWith('末班车'))
+          .map((td) => td.cellIndex);
+        const offsetLast =
+          dl.length == 1 && ul.length == 1 ? [dl[0], ul[0]] : [dl, ul];
 
         // PATCH: 假定全程被置于最后，将全程提前
         offsetLast.forEach((o) => {
