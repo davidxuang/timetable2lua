@@ -76,6 +76,8 @@ const CRT = {
 
           const offsetFirst = [1, 2];
           const offsetLast: (number | number[])[] = [3, 4];
+          const dl = [];
+          const ul = [];
 
           if (
             termini.length / days.length == 2 &&
@@ -83,9 +85,6 @@ const CRT = {
           ) {
             // no op
           } else if (termini.length / days.length >= 2) {
-            offsetLast[0] = [];
-            offsetLast[1] = [];
-
             let i = 0;
             for (const terminus of termini) {
               const span = sub_termini.slice(i, i + terminus.colSpan);
@@ -101,7 +100,7 @@ const CRT = {
                     return text.match(/↑|外环|富华路/u) !== null;
                   }).cellIndex + 1;
               } else {
-                (offsetLast[0] as number[]).push(
+                dl.push(
                   ...span
                     .filter((td) => {
                       const text = td.innerText.trim();
@@ -109,7 +108,7 @@ const CRT = {
                     })
                     .map((td) => td.cellIndex + 1),
                 );
-                (offsetLast[1] as number[]).push(
+                ul.push(
                   ...span
                     .filter((td) => {
                       const text = td.innerText.trim();
@@ -119,14 +118,14 @@ const CRT = {
                 );
               }
 
-              offsetLast[0] = (offsetLast[0] as number[]).trySingle();
-              offsetLast[1] = (offsetLast[1] as number[]).trySingle();
-
               i += terminus.colSpan;
               if (i >= days[0].colSpan) {
                 break;
               }
             }
+
+            offsetLast[0] = dl.trySingle();
+            offsetLast[1] = ul.trySingle();
           } else {
             throw termini.length;
           }
