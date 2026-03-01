@@ -93,29 +93,34 @@ const CRT = {
                 offsetFirst[0] =
                   span.single((td) => {
                     const text = td.innerText.trim();
-                    return text.includes('↓') || text.includes('内环');
+                    return text.match(/↓|内环|跳磴南/u) !== null;
                   }).cellIndex + 1;
                 offsetFirst[1] =
                   span.single((td) => {
                     const text = td.innerText.trim();
-                    return text.includes('↑') || text.includes('外环');
+                    return text.match(/↑|外环|富华路/u) !== null;
                   }).cellIndex + 1;
               } else {
-                offsetLast[0] = span
-                  .filter((td) => {
-                    const text = td.innerText.trim();
-                    return text.includes('↓') || text.includes('内环');
-                  })
-                  .map((td) => td.cellIndex + 1)
-                  .trySingle();
-                offsetLast[1] = span
-                  .filter((td) => {
-                    const text = td.innerText.trim();
-                    return text.includes('↑') || text.includes('外环');
-                  })
-                  .map((td) => td.cellIndex + 1)
-                  .trySingle();
+                (offsetLast[0] as number[]).push(
+                  ...span
+                    .filter((td) => {
+                      const text = td.innerText.trim();
+                      return text.match(/↓|内环|跳磴南/u) !== null;
+                    })
+                    .map((td) => td.cellIndex + 1),
+                );
+                (offsetLast[1] as number[]).push(
+                  ...span
+                    .filter((td) => {
+                      const text = td.innerText.trim();
+                      return text.match(/↑|外环|富华路/u) !== null;
+                    })
+                    .map((td) => td.cellIndex + 1),
+                );
               }
+
+              offsetLast[0] = (offsetLast[0] as number[]).trySingle();
+              offsetLast[1] = (offsetLast[1] as number[]).trySingle();
 
               i += terminus.colSpan;
               if (i >= days[0].colSpan) {
