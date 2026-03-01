@@ -1,7 +1,7 @@
 import { assert, attachButton, FlexTimetable, luaifyTimetable } from '../common.js';
 
 function parseCell(cell: HTMLElement) {
-  return cell.innerText.trim().replace(/——|[（(]到达[）)]/u, '');
+  return cell.innerText.trim().replace(/\p{Pd}+|[（(]到达[）)]/u, '');
 }
 
 const WHRT = {

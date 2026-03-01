@@ -9,7 +9,7 @@ import {
 function parseCell(cell: HTMLElement, closed: boolean) {
   return cell.innerText
     .trim()
-    .replace('--', closed ? 'nil' : '')
+    .replace(/\p{Pd}+/u, closed ? 'nil' : '')
     .replace(/^0([4-9]):(\d\d)$/, '$1:$2'); // trim leading zero for first trains;
 }
 
