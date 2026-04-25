@@ -4,7 +4,7 @@ import {
   FlexTimePerDay,
   FlexTimetable,
   luaifyTimetable,
-} from '../common.js';
+} from '../common';
 
 function parseCell(cell: HTMLElement, closed: boolean) {
   return cell.innerText

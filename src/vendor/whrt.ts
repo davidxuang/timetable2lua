@@ -3,7 +3,7 @@ import {
   attachButton,
   FlexTimetable,
   luaifyTimetable,
-} from '../common.js';
+} from '../common';
 
 function parseCell(cell: HTMLElement) {
   return cell.innerText.trim().replace(/\p{Pd}+|[（(]到达[）)]/u, '');

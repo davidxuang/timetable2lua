@@ -1,5 +1,5 @@
-import CRT from './vendor/crt.js';
-import WHRT from './vendor/whrt.js';
+import CRT from './vendor/crt';
+import WHRT from './vendor/whrt';
 
 declare global {
   interface Array<T> {
