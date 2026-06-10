@@ -106,16 +106,31 @@ function luaifyNestedStringArray(
   }
 }
 
-/**
- * 将时刻表对象序列化为Lua对象
- * @param timetable 时刻表
- * @returns Lua对象字符串
- */
-function luaifyTimetable(timetable: FlexTimetable) {
-  timetable = deduplicateDays(timetable);
-  const padding =
-    Math.max(...[...timetable.keys()].map((str) => wcwidth(str))) + 4;
-  return `
+const Timetable = {
+  reverse: function (timetable: FlexTimetable) {
+    return new Map(
+      [...timetable.entries()]
+        .reverse()
+        .map(([name, times]) => [
+          name,
+          times.map(([first, last]): [FlexFirstPerDay, FlexLastPerDay] => [
+            first.reverse(),
+            last.reverse(),
+          ]),
+        ]),
+    );
+  },
+
+  /**
+   * 将时刻表对象序列化为Lua对象
+   * @param timetable 时刻表
+   * @returns Lua对象字符串
+   */
+  luaify: function (timetable: FlexTimetable) {
+    timetable = deduplicateDays(timetable);
+    const padding =
+      Math.max(...[...timetable.keys()].map((str) => wcwidth(str))) + 4;
+    return `
 \t\t\tstations = ${luaifyNestedStringArray([...timetable.keys()])},
 \t\t\tdata = {
 ${Array.from(timetable)
@@ -125,12 +140,13 @@ ${Array.from(timetable)
   )
   .join('\n')}
 \t\t\t}`;
-}
+  },
+};
 
 export {
   assert,
   attachButton,
-  luaifyTimetable,
+  Timetable,
   type FlexTimetable,
   type FlexTimePerDay,
 };

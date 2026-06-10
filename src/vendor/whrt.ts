@@ -1,9 +1,4 @@
-import {
-  assert,
-  attachButton,
-  FlexTimetable,
-  luaifyTimetable,
-} from '../common';
+import { assert, attachButton, FlexTimetable, Timetable } from '../common.js';
 
 function parseCell(cell: HTMLElement) {
   return cell.innerText.trim().replace(/\p{Pd}+|[（(]到达[）)]/u, '');
@@ -92,7 +87,7 @@ const WHRT = {
         }
       });
 
-      navigator.clipboard.writeText(luaifyTimetable(timetable));
+      navigator.clipboard.writeText(Timetable.luaify(timetable));
     };
 
     attachButton(title, copyData);

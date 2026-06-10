@@ -3,7 +3,7 @@ import monkey from 'vite-plugin-monkey';
 
 export default defineConfig({
   build: {
-    target: 'es2020',
+    target: 'es2022',
   },
   plugins: [
     monkey({
@@ -15,7 +15,7 @@ export default defineConfig({
         icon: 'https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji/assets/Metro/3D/metro_3d.png',
         namespace: 'https://dvxg.de/',
         match: [
-          'https://www.cqmetro.cn/smbsj.html',
+          'https://www.cqmetro.cn/smbsj/',
           'https://www.wuhanrt.com/news-content.html*',
         ],
         updateURL:
