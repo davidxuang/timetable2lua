@@ -44,7 +44,9 @@ function parseRows(
     if (row.length == 0) {
       break;
     }
-    const name = row[0].innerText.trim().replace('航站楼', '');
+    const name = row[0].innerText
+      .trim()
+      .replace(/(?:江北机场)?(T\d)(?:航站楼)?/, '江北机场$1');
     if (!name || name == '--') {
       break;
     }
@@ -211,9 +213,13 @@ const CRT = {
         const rows = [...table.tBodies[0].rows].map((row) => [...row.cells]);
         let timetable = parseRows(rows, days, first, last);
 
+        const [line_name, start_name] = [
+          caption.innerText,
+          timetable.keys().next().value ?? '',
+        ];
         if (
-          caption.innerText.includes('璧铜') &&
-          timetable.keys().next().value?.includes('璧山')
+          (line_name.includes('璧铜') && start_name.includes('璧山')) ||
+          (line_name.includes('15') && start_name.includes('两江影视城'))
         ) {
           timetable = Timetable.reverse(timetable);
         }
